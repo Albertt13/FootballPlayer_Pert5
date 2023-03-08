@@ -1,5 +1,6 @@
 package com.if41.footballplayer;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,22 +26,33 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Create Table
-        String query = "CREATE TABLE" + TABLE_NAME + " (" +
+        String query = "CREATE TABLE " + TABLE_NAME + " (" +
                 FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 FIELD_NAMA + " VARCHAR(50)," +
-                FIELD_NO + " INTEGER(2)," +
+                FIELD_NO + " VARCHAR(2)," +
                 FIELD_CLUB + " VARCHAR(50)" +
                 " )";
 
         db.execSQL(query);
-
-
-
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //
+        String query = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        db.execSQL(query);
+        onCreate(db);
+    }
 
+    public long tambahPlayer (String nama, String nomor, String club) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(FIELD_NAMA, nama);
+        cv.put(FIELD_NO, nomor);
+        cv.put(FIELD_CLUB, club);
+
+        long eksekusi = db.insert(TABLE_NAME, null, cv);
+        return eksekusi;
     }
 }

@@ -34,6 +34,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(query);
 
+
+
+
     }
 
     @Override

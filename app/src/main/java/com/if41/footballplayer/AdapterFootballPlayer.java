@@ -57,9 +57,9 @@ public class AdapterFootballPlayer extends RecyclerView.Adapter<AdapterFootballP
             super(itemView);
 
             tvID = itemView.findViewById(R.id.tv_id);
-            tvNama = itemView.findViewById(R.id.et_name);
-            tvNomor = itemView.findViewById(R.id.et_nomor);
-            tvClub = itemView.findViewById(R.id.et_club);
+            tvNama = itemView.findViewById(R.id.tv_nama);
+            tvNomor = itemView.findViewById(R.id.tv_nomor);
+            tvClub = itemView.findViewById(R.id.tv_club);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override

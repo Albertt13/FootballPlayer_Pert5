@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private void SQLiteToArrayList() {
         Cursor varCursor = myDB.bacaDataPlayer();
 
-        if (varCursor.getCount() != 0) {
+        if (varCursor.getCount() == 0) {
             Toast.makeText(this, "Tidak Ada Data", Toast.LENGTH_SHORT).show();
         }
         else {

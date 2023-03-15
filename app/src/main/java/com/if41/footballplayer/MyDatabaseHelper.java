@@ -59,12 +59,30 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor bacaDataPlayer () {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME; //+ " ORDER BY " + FIELD_NAMA;
+        String query = "SELECT * FROM " + TABLE_NAME ; //+ " ORDER BY " + FIELD_NAMA;
 
         Cursor varCursor = null;
         if (db != null) {
             varCursor = db.rawQuery(query, null);
         }
         return varCursor;
+    }
+
+    public long hapusPlayer (String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long eksekusi = db.delete(TABLE_NAME, "id = ?", new String[]{id});
+        return eksekusi;
+    }
+
+    public long ubahPlayer (String id, String nama, String nomor, String club) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(FIELD_NAMA, nama);
+        cv.put(FIELD_NO, nomor);
+        cv.put(FIELD_CLUB, club);
+
+        long eksekusi = db.update(TABLE_NAME, cv, "id = ?", new String[]{id});
+        return eksekusi;
     }
 }

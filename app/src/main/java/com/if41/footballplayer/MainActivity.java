@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fabTambah;
     private AdapterFootballPlayer ADPlayer;
     private RecyclerView rvPlayer;
-    private ArrayList<String> arrNama, arrNomor, arrClub;
+    private ArrayList<String> arrID, arrNama, arrNomor, arrClub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             while (varCursor.moveToNext()) {    //moveToNext artinya data akan dibaca perbaris satu per satu
+                arrID.add(varCursor.getString(0));
                 arrNama.add(varCursor.getString(1));
                 arrNomor.add(varCursor.getString(2));
                 arrClub.add(varCursor.getString(3));
@@ -62,13 +63,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tampilPlayer () {
+        arrID = new ArrayList<>();
         arrNama = new ArrayList<>();
         arrNomor = new ArrayList<>();
         arrClub = new ArrayList<>();
 
         SQLiteToArrayList();
 
-        ADPlayer = new AdapterFootballPlayer(MainActivity.this, arrNama, arrNomor, arrClub);
+        ADPlayer = new AdapterFootballPlayer(MainActivity.this, arrID, arrNama, arrNomor, arrClub);
 
         rvPlayer.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         rvPlayer.setAdapter(ADPlayer);

@@ -3,6 +3,7 @@ package com.if41.footballplayer;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class AdapterFootballPlayer extends RecyclerView.Adapter<AdapterFootballP
     public void onBindViewHolder(@NonNull ViewHolderPLayer holder, int position) {
         holder.tvID.setText(arrID.get(position).toString());
         holder.tvNama.setText(arrNama.get(position).toString());
+        //holder.tvNama.setText(arrNama.get(position).toString());
         holder.tvNomor.setText(arrNomor.get(position).toString());
         holder.tvClub.setText(arrClub.get(position).toString());
     }
@@ -57,9 +59,9 @@ public class AdapterFootballPlayer extends RecyclerView.Adapter<AdapterFootballP
             super(itemView);
 
             tvID = itemView.findViewById(R.id.tv_id);
-            tvNama = itemView.findViewById(R.id.et_name);
-            tvNomor = itemView.findViewById(R.id.et_nomor);
-            tvClub = itemView.findViewById(R.id.et_club);
+            tvNama = itemView.findViewById(R.id.tv_nama);
+            tvNomor = itemView.findViewById(R.id.tv_nomor);
+            tvClub = itemView.findViewById(R.id.tv_club);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -72,7 +74,12 @@ public class AdapterFootballPlayer extends RecyclerView.Adapter<AdapterFootballP
                     pesan.setPositiveButton("Ubah", new DialogInterface.OnClickListener() {     //new DialogInterface.OnClickListener() bertujuan untuk apa yang terjadi kalau kita ubah
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            Intent varIntent = new Intent(ctx, UbahActivity.class);
+                            varIntent.putExtra("varID", tvID.getText().toString());
+                            varIntent.putExtra("varNama", tvNama.getText().toString());
+                            varIntent.putExtra("varNomor", tvNomor.getText().toString());
+                            varIntent.putExtra("varClub", tvClub.getText().toString());
+                            ctx.startActivity(varIntent);
                         }
                     });
                     pesan.setNegativeButton("Hapus", new DialogInterface.OnClickListener() {
